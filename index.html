@@ -393,8 +393,6 @@
     h1 { font-size: 1.3rem; }
   }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>emailjs.init('WZzCaCBEdewsDjpOu');</script>
 </head>
 <body>
 
@@ -738,17 +736,14 @@ async function finalizar() {
   let now = new Date();
   let data_cadastro = now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
 
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdelU_cl5IhCZ3EA2j7VDpTlm19uhibJ6DYmDLJ-hjXlYj-ZdfsJp5m2nJ7bsuJeS4/exec';
+
   try {
-    await emailjs.send('service_1e1xj78', 'template_jg5w7wv', {
-      to_email: 'feducks@gmail.com',
-      nome,
-      cpf,
-      rg,
-      nascimento,
-      email,
-      orgao,
-      data_cadastro,
-      foto: photoData
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, cpf, rg, nascimento, email, orgao, data_cadastro, foto: photoData })
     });
 
     // Preencher tela de sucesso
@@ -773,7 +768,7 @@ async function finalizar() {
   } catch(err) {
     btn.disabled = false;
     btn.textContent = 'Finalizar cadastro ✓';
-    alert('Erro ao enviar cadastro. Verifique sua conexão e tente novamente.\n\nDetalhe: ' + (err.text || err.message || JSON.stringify(err)));
+    alert('Erro ao enviar cadastro. Verifique sua conexão e tente novamente.\n\nDetalhe: ' + (err.message || JSON.stringify(err)));
   }
 }
 </script>
