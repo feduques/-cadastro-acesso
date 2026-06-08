@@ -461,10 +461,7 @@
         <input type="text" id="rg" placeholder="00.000.000-0" maxlength="12">
         <div class="field-error" id="err-rg">Informe o RG</div>
       </div>
-      <div class="field">
-        <label>Órgão expedidor</label>
-        <input type="text" id="orgao" placeholder="Ex: SSP/SP">
-      </div>
+
       <div class="nav-row">
         <button class="btn" onclick="goStep1()">← Voltar</button>
         <button class="btn primary" onclick="goStep3()">Continuar →</button>
@@ -747,7 +744,7 @@ async function finalizar() {
   let rg = document.getElementById('rg').value.trim();
   let nascimento = document.getElementById('nascimento').value.trim();
   let email = document.getElementById('email').value.trim();
-  let orgao = document.getElementById('orgao').value.trim();
+  let orgao = '';
   let now = new Date();
   let data_cadastro = now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
 
@@ -794,3 +791,4 @@ async function finalizar() {
 </script>
 </body>
 </html>
+
